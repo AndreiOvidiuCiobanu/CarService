@@ -1,12 +1,12 @@
 package com.fmi.project.fuel;
 
-public class Gasoline extends Fuel{
+public class Gasoline extends Fuel {
 
     private String isTurboOrAspirate;
 
-    public Gasoline( boolean mayHaveProblems,
+    public Gasoline(boolean mayHaveProblems,
                     boolean mayBeForbidden, String isTurboOrAspirate) {
-        super( mayHaveProblems, mayBeForbidden);
+        super(mayHaveProblems, mayBeForbidden);
         this.isTurboOrAspirate = isTurboOrAspirate;
     }
 

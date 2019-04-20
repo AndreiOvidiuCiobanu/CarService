@@ -2,7 +2,7 @@ package com.fmi.project.autoService;
 
 import com.fmi.project.car.Car;
 
-public abstract class CarService implements Comparable<CarService>{
+public abstract class CarService implements Comparable<CarService> {
 
     protected Car car;
 

@@ -1,15 +1,15 @@
 package com.fmi.project.fuel;
 
-public class Electric extends Fuel{
+public class Electric extends Fuel {
 
     private int numberOfKilometesAutonomy;
 
     private int durationForFullyCharged;
 
-    public Electric( boolean mayHaveProblems,
+    public Electric(boolean mayHaveProblems,
                     boolean mayBeForbidden,
                     int numberOfKilometesAutonomy, int durationForFullyCharged) {
-        super( mayHaveProblems, mayBeForbidden);
+        super(mayHaveProblems, mayBeForbidden);
         this.numberOfKilometesAutonomy = numberOfKilometesAutonomy;
         this.durationForFullyCharged = durationForFullyCharged;
     }

@@ -2,8 +2,6 @@ package com.fmi.project.autoService;
 
 import com.fmi.project.car.Car;
 
-import java.util.List;
-
 public class CarServiceTuning extends CarService {
 
     private String componentsForTuning;

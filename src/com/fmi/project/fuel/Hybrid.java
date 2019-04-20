@@ -1,12 +1,12 @@
 package com.fmi.project.fuel;
 
-public class Hybrid extends Fuel{
+public class Hybrid extends Fuel {
 
     protected int numberOfKilometresInElectricMode;
 
     public Hybrid(boolean mayHaveProblems, boolean mayBeForbidden,
                   int numberOfKilometresInElectricMode) {
-        super( mayHaveProblems, mayBeForbidden);
+        super(mayHaveProblems, mayBeForbidden);
         this.numberOfKilometresInElectricMode = numberOfKilometresInElectricMode;
     }
 

@@ -1,8 +1,8 @@
 package com.fmi.project.car;
 
-import com.fmi.project.fuel.*;
+import com.fmi.project.fuel.Fuel;
 
-public abstract class Car implements Comparable <Car>{
+public abstract class Car implements Comparable<Car> {
 
     protected String brand;
 
@@ -108,6 +108,6 @@ public abstract class Car implements Comparable <Car>{
 
     @Override
     public int compareTo(Car car) {
-       return this.getBrand().compareTo(car.brand);
+        return this.getBrand().compareTo(car.brand);
     }
 }

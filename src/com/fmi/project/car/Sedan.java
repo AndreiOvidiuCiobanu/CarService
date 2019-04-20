@@ -10,7 +10,7 @@ public class Sedan extends Car {
 
     public Sedan(String brand, String model, int euro, String color,
                  int horsePower, int cilindricalCapacity, long numberOfKilometres,
-                 double consumption, int priceToFull, Fuel fuel,int trunkCapacity,
+                 double consumption, int priceToFull, Fuel fuel, int trunkCapacity,
                  boolean hasAirSuspension) {
 
         super(brand, model, euro, color, horsePower, cilindricalCapacity,

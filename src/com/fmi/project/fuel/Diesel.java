@@ -1,10 +1,10 @@
 package com.fmi.project.fuel;
 
-public class Diesel extends Fuel{
+public class Diesel extends Fuel {
 
     private int numberOfTurbines;
 
-    public Diesel( boolean mayHaveProblems,
+    public Diesel(boolean mayHaveProblems,
                   boolean mayBeForbidden, int numberOfTurbines) {
         super(mayHaveProblems, mayBeForbidden);
         this.numberOfTurbines = numberOfTurbines;
@@ -14,12 +14,12 @@ public class Diesel extends Fuel{
         this.numberOfTurbines = numberOfTurbines;
     }
 
-    public int getNumberOfTurbines() {
-        return numberOfTurbines;
-    }
-
     public Diesel() {
 
+    }
+
+    public int getNumberOfTurbines() {
+        return numberOfTurbines;
     }
 
     public void setNumberOfTurbines(int numberOfTurbines) {

@@ -1,7 +1,5 @@
 package com.fmi.project;
 
-import com.fmi.project.car.*;
-import com.fmi.project.fuel.*;
 import com.fmi.project.services.Service;
 
 public class Main {

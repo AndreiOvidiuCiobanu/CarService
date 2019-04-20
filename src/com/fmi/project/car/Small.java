@@ -9,7 +9,7 @@ public class Small extends Car {
                  double consumption, int priceToFull, Fuel fuel) {
 
         super(brand, model, euro, color, horsePower, cilindricalCapacity,
-                numberOfKilometres, consumption, priceToFull,fuel);
+                numberOfKilometres, consumption, priceToFull, fuel);
 
     }
 

@@ -4,25 +4,19 @@ import com.fmi.project.autoService.*;
 import com.fmi.project.car.*;
 import com.fmi.project.fuel.*;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.Vector;
 
 public class Service {
 
-    private static List<Car> carsList = new ArrayList<Car>();
-
-    private static Vector <CarService> servicesVector = new Vector<CarService>();
-
-    private static  Car [] cars = new Car[10];
-
-    private static Fuel [] fuels = new Fuel[10];
-
-    private static CarService[] listOfServices = new CarService[10];
-
     private static final Service instance = new Service();
-
-    public static  Service getInstance (){
-        return instance;
-    }
+    private static List<Car> carsList = new ArrayList<Car>();
+    private static Vector<CarService> servicesVector = new Vector<CarService>();
+    private static Car[] cars = new Car[10];
+    private static Fuel[] fuels = new Fuel[10];
+    private static CarService[] listOfServices = new CarService[10];
 
     private Service() {
 
@@ -46,6 +40,10 @@ public class Service {
 
         fuels[9] = new Electric(false, false, 500,
                 120);
+
+        fuels[0] = FileTextServiceDiesel.getInstance().readDieselFromFile("files/diesel.csv");
+
+        System.out.println("fuel[0] " + fuels[0].toString());
 
         cars[0] = new Break("Skoda", "Superb", 6, "blue",
                 190, 2000, 123000,
@@ -88,76 +86,80 @@ public class Service {
                 0, 35000, 0, 0, fuels[9],
                 400, false);
 
-       listOfServices [0] = new CarServiceCasco(cars[0], 500, 30, true,
-               false, 0);
+        listOfServices[0] = new CarServiceCasco(cars[0], 500, 30, true,
+                false, 0);
 
-       listOfServices [1] = new CarServiceInsurance(cars[1], 1000, 10, true,
-               false);
+        listOfServices[1] = new CarServiceInsurance(cars[1], 1000, 10, true,
+                false);
 
-       listOfServices [2] = new CarServiceRevision(cars [2], 300, 7, false);
+        listOfServices[2] = new CarServiceRevision(cars[2], 300, 7, false);
 
-       listOfServices [3] = new CarServiceTuning(cars [3], 5000, 40,
-               "oglinda, suspensii, jante");
+        listOfServices[3] = new CarServiceTuning(cars[3], 5000, 40,
+                "oglinda, suspensii, jante");
 
-       listOfServices [4] = new CarServiceRevision(cars [4], 800, 2, true);
+        listOfServices[4] = new CarServiceRevision(cars[4], 800, 2, true);
 
-       listOfServices [5] = new CarServiceCasco(cars [5], 5000, 14, true,
-               false, 0);
+        listOfServices[5] = new CarServiceCasco(cars[5], 5000, 14, true,
+                false, 0);
 
-       listOfServices [6] = new CarServiceInsurance(cars[6], 800, 14, true,
-               true);
+        listOfServices[6] = new CarServiceInsurance(cars[6], 800, 14, true,
+                true);
 
-       listOfServices [7] = new CarServiceTuning(cars [7], 8000, 30,
-               "faruri, suspensii, jante, boxe, vopsea");
+        listOfServices[7] = new CarServiceTuning(cars[7], 8000, 30,
+                "faruri, suspensii, jante, boxe, vopsea");
 
-       listOfServices[8] = new CarServiceTuning(cars[8], 3000, 10, "vopsea");
+        listOfServices[8] = new CarServiceTuning(cars[8], 3000, 10, "vopsea");
 
-       listOfServices [9] = new CarServiceTuning(cars[9], 10000, 20, "upgrade estetic");
+        listOfServices[9] = new CarServiceTuning(cars[9], 10000, 20, "upgrade estetic");
 
-       for(int i = 0; i < 10; i++){
-           carsList.add(cars[i]);
-           servicesVector.add(listOfServices[i]);
-       }
-      Collections.sort(carsList);
-      Collections.sort(servicesVector);
+        for (int i = 0; i < 10; i++) {
+            carsList.add(cars[i]);
+            servicesVector.add(listOfServices[i]);
+        }
+        Collections.sort(carsList);
+        Collections.sort(servicesVector);
     }
 
-    public int howManySkodaCars(){
+    public static Service getInstance() {
+        return instance;
+    }
+
+    public int howManySkodaCars() {
         int number = 0;
-        for(int i = 0; i < cars.length; i++)
-            if(cars[i].getBrand() == "Skoda")
-                number ++;
+        for (int i = 0; i < cars.length; i++)
+            if (cars[i].getBrand() == "Skoda")
+                number++;
         return number;
     }
 
-    public int theBiggestPeriodForACarInService(){
+    public int theBiggestPeriodForACarInService() {
         int period = 0;
-        for(int i = 0; i < listOfServices.length; i++)
-            if(period < listOfServices[i].getDuration())
+        for (int i = 0; i < listOfServices.length; i++)
+            if (period < listOfServices[i].getDuration())
                 period = listOfServices[i].getDuration();
         return period;
     }
 
-    public int howManyGuiltyPeopleForAccidents(){
+    public int howManyGuiltyPeopleForAccidents() {
         int number = 0;
-        for(int i = 0; i < listOfServices.length; i++)
-            if(listOfServices[i].getClass() == CarServiceCasco.class)
-                number ++;
+        for (int i = 0; i < listOfServices.length; i++)
+            if (listOfServices[i].getClass() == CarServiceCasco.class)
+                number++;
         return number;
     }
 
-    public double totalCostForServiceOperations(){
+    public double totalCostForServiceOperations() {
         float sum = 0;
-        for(int i = 0; i < listOfServices.length; i++)
+        for (int i = 0; i < listOfServices.length; i++)
             sum += listOfServices[i].getCost();
         return sum;
     }
 
-    public void theMostExpensiveCarServiceOperation(){
+    public void theMostExpensiveCarServiceOperation() {
         float cost = 0;
         int index = 0;
-        for(int i = 0; i < listOfServices.length; i++)
-            if (listOfServices[i].getCost() > cost){
+        for (int i = 0; i < listOfServices.length; i++)
+            if (listOfServices[i].getCost() > cost) {
                 cost = listOfServices[i].getCost();
                 index = i;
             }
@@ -165,56 +167,56 @@ public class Service {
                 + " " + listOfServices[index].getCar().getModel());
     }
 
-    public int howManyEcoCarsAreInService(){
+    public int howManyEcoCarsAreInService() {
         int number = 0;
-        for(int i = 0; i < listOfServices.length; i++)
-            if(!listOfServices[i].getCar().getFuel().isMayBeForbidden())
+        for (int i = 0; i < listOfServices.length; i++)
+            if (!listOfServices[i].getCar().getFuel().isMayBeForbidden())
                 number++;
         return number;
     }
 
-    public int howManyCarsWithMoreThan200HorsePower(){
+    public int howManyCarsWithMoreThan200HorsePower() {
         int number = 0;
-        for(int i = 0; i < listOfServices.length; i++)
-            if(listOfServices[i].getCar().getHorsePower() > 200)
+        for (int i = 0; i < listOfServices.length; i++)
+            if (listOfServices[i].getCar().getHorsePower() > 200)
                 number++;
         return number;
     }
 
-    public boolean areAnyBmwSeria5CarInService(){
-        for(int i = 0; i < listOfServices.length; i++)
-            if(listOfServices[i].getCar().getBrand() == "Bmw" &&
+    public boolean areAnyBmwSeria5CarInService() {
+        for (int i = 0; i < listOfServices.length; i++)
+            if (listOfServices[i].getCar().getBrand() == "Bmw" &&
                     listOfServices[i].getCar().getModel() == "Seria 5")
                 return true;
         return false;
     }
 
-    public int howManyCarsAreForTuning(){
+    public int howManyCarsAreForTuning() {
         int number = 0;
-        for(int i = 0; i < listOfServices.length; i++)
-            if(listOfServices[i].getClass() == CarServiceTuning.class)
+        for (int i = 0; i < listOfServices.length; i++)
+            if (listOfServices[i].getClass() == CarServiceTuning.class)
                 number++;
         return number;
     }
 
-    public String theMostPowerfulCar(){
+    public String theMostPowerfulCar() {
         int power = 0;
         int index = 0;
-        for(int i = 0; i < listOfServices.length; i++)
-            if(listOfServices[i].getCar().getHorsePower() > power) {
+        for (int i = 0; i < listOfServices.length; i++)
+            if (listOfServices[i].getCar().getHorsePower() > power) {
                 power = listOfServices[i].getCar().getHorsePower();
                 index = i;
             }
-        return listOfServices[index].getCar().getBrand() + " " +listOfServices[index].getCar().getModel();
+        return listOfServices[index].getCar().getBrand() + " " + listOfServices[index].getCar().getModel();
     }
 
-    public void printCarsSorted(){
-        for(Car car : carsList){
+    public void printCarsSorted() {
+        for (Car car : carsList) {
             System.out.println(car.getBrand());
         }
     }
 
-    public void printCarServicesSorted(){
+    public void printCarServicesSorted() {
         for (CarService carService : servicesVector)
             System.out.println(carService.getDuration());
     }

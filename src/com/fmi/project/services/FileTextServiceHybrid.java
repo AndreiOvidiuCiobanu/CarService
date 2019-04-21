@@ -34,7 +34,7 @@ public class FileTextServiceHybrid {
      * @param fileNamePath
      * @return
      */
-    public Hybrid readDieselFromFile(String fileNamePath) {
+    public Hybrid readHybridFromFile(String fileNamePath) {
         Hybrid hybrid = null;
         try {
 
@@ -43,8 +43,13 @@ public class FileTextServiceHybrid {
 
             String line = lineNumberReader.readLine();
             String[] values = line.split(",");
-            hybrid = new Hybrid(Boolean.parseBoolean(values[0]), Boolean.parseBoolean(values[1]),
-                    Integer.parseInt(values[2]));
+            int nr = 0;
+            try {
+                nr = Integer.parseInt(values[2].trim());
+            } catch (NumberFormatException exc) {
+                exc.printStackTrace();
+            }
+            hybrid = new Hybrid(Boolean.parseBoolean(values[0]), Boolean.parseBoolean(values[1]), nr);
             lineNumberReader.close();
 
         } catch (FileNotFoundException e) {

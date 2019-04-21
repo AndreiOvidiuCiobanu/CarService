@@ -43,8 +43,22 @@ public class FileTextServiceElectric {
 
             String line = lineNumberReader.readLine();
             String[] values = line.split(",");
+            int km = 0;
+            try {
+                km = Integer.parseInt(values[2].trim());
+            } catch (NumberFormatException exc) {
+                exc.printStackTrace();
+            }
+
+            int duration = 0;
+            try {
+                duration = Integer.parseInt(values[3].trim());
+            } catch (NumberFormatException exc) {
+                exc.printStackTrace();
+            }
+
             electric = new Electric(Boolean.parseBoolean(values[0]), Boolean.parseBoolean(values[1]),
-                    Integer.parseInt(values[2]), Integer.parseInt(values[3]));
+                    km, duration);
             lineNumberReader.close();
 
         } catch (FileNotFoundException e) {

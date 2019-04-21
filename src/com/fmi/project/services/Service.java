@@ -11,24 +11,24 @@ import java.util.Vector;
 
 public class Service {
 
-    private static final Service instance = new Service();
     private static List<Car> carsList = new ArrayList<Car>();
     private static Vector<CarService> servicesVector = new Vector<CarService>();
     private static Car[] cars = new Car[10];
     private static Fuel[] fuels = new Fuel[10];
     private static CarService[] listOfServices = new CarService[10];
+    private static final Service instance = new Service();
 
     private Service() {
 
-        fuels[0] = new Diesel(true, true, 1);
+        //fuels[0] = new Diesel(true, true, 1);
 
-        fuels[1] = new Gasoline(false, true, "Turbo");
+       // fuels[1] = new Gasoline(false, true, "Turbo");
 
         fuels[2] = new Diesel(true, true, 1);
 
         fuels[3] = new Diesel(true, true, 3);
 
-        fuels[4] = new Hybrid(false, false, 50);
+        //fuels[4] = new Hybrid(false, false, 50);
 
         fuels[5] = new Diesel(true, true, 1);
 
@@ -38,12 +38,12 @@ public class Service {
 
         fuels[8] = new Gasoline(true, true, "Turbo");
 
-        fuels[9] = new Electric(false, false, 500,
-                120);
+        //fuels[9] = new Electric(false, false, 500, 120);
 
         fuels[0] = FileTextServiceDiesel.getInstance().readDieselFromFile("files/diesel.csv");
-
-        System.out.println("fuel[0] " + fuels[0].toString());
+        fuels[1] = FileTextServiceGasoline.getInstance().readGasolineFromFile("files/gasoline.csv");
+        fuels[4] = FileTextServiceHybrid.getInstance().readHybridFromFile("files/hybrid.csv");
+        fuels[9] = FileTextServiceElectric.getInstance().readElectricFromFile("files/electric.csv");
 
         cars[0] = new Break("Skoda", "Superb", 6, "blue",
                 190, 2000, 123000,
@@ -125,6 +125,11 @@ public class Service {
     }
 
     public int howManySkodaCars() {
+        StringBuilder stringBuilder = new StringBuilder("");
+        stringBuilder.append(new Object(){}.getClass().getEnclosingMethod().getName()).append(",").append("1");
+        FileTextServiceTimesApel.getInstance().writeTextToFile(stringBuilder.toString(),
+                "files/times.csv");
+
         int number = 0;
         for (int i = 0; i < cars.length; i++)
             if (cars[i].getBrand() == "Skoda")
@@ -133,6 +138,11 @@ public class Service {
     }
 
     public int theBiggestPeriodForACarInService() {
+        StringBuilder stringBuilder = new StringBuilder("");
+        stringBuilder.append(new Object(){}.getClass().getEnclosingMethod().getName()).append(",").append("1");
+        FileTextServiceTimesApel.getInstance().writeTextToFile(stringBuilder.toString(),
+                "files/times.csv");
+
         int period = 0;
         for (int i = 0; i < listOfServices.length; i++)
             if (period < listOfServices[i].getDuration())
@@ -141,6 +151,11 @@ public class Service {
     }
 
     public int howManyGuiltyPeopleForAccidents() {
+        StringBuilder stringBuilder = new StringBuilder("");
+        stringBuilder.append(new Object(){}.getClass().getEnclosingMethod().getName()).append(",").append("1");
+        FileTextServiceTimesApel.getInstance().writeTextToFile(stringBuilder.toString(),
+                "files/times.csv");
+
         int number = 0;
         for (int i = 0; i < listOfServices.length; i++)
             if (listOfServices[i].getClass() == CarServiceCasco.class)
@@ -149,6 +164,11 @@ public class Service {
     }
 
     public double totalCostForServiceOperations() {
+        StringBuilder stringBuilder = new StringBuilder("");
+        stringBuilder.append(new Object(){}.getClass().getEnclosingMethod().getName()).append(",").append("1");
+        FileTextServiceTimesApel.getInstance().writeTextToFile(stringBuilder.toString(),
+                "files/times.csv");
+
         float sum = 0;
         for (int i = 0; i < listOfServices.length; i++)
             sum += listOfServices[i].getCost();
@@ -156,6 +176,11 @@ public class Service {
     }
 
     public void theMostExpensiveCarServiceOperation() {
+        StringBuilder stringBuilder = new StringBuilder("");
+        stringBuilder.append(new Object(){}.getClass().getEnclosingMethod().getName()).append(",").append("1");
+        FileTextServiceTimesApel.getInstance().writeTextToFile(stringBuilder.toString(),
+                "files/times.csv");
+
         float cost = 0;
         int index = 0;
         for (int i = 0; i < listOfServices.length; i++)
@@ -168,6 +193,11 @@ public class Service {
     }
 
     public int howManyEcoCarsAreInService() {
+        StringBuilder stringBuilder = new StringBuilder("");
+        stringBuilder.append(new Object(){}.getClass().getEnclosingMethod().getName()).append(",").append("1");
+        FileTextServiceTimesApel.getInstance().writeTextToFile(stringBuilder.toString(),
+                "files/times.csv");
+
         int number = 0;
         for (int i = 0; i < listOfServices.length; i++)
             if (!listOfServices[i].getCar().getFuel().isMayBeForbidden())
@@ -176,6 +206,11 @@ public class Service {
     }
 
     public int howManyCarsWithMoreThan200HorsePower() {
+        StringBuilder stringBuilder = new StringBuilder("");
+        stringBuilder.append(new Object(){}.getClass().getEnclosingMethod().getName()).append(",").append("1");
+        FileTextServiceTimesApel.getInstance().writeTextToFile(stringBuilder.toString(),
+                "files/times.csv");
+
         int number = 0;
         for (int i = 0; i < listOfServices.length; i++)
             if (listOfServices[i].getCar().getHorsePower() > 200)
@@ -184,6 +219,11 @@ public class Service {
     }
 
     public boolean areAnyBmwSeria5CarInService() {
+        StringBuilder stringBuilder = new StringBuilder("");
+        stringBuilder.append(new Object(){}.getClass().getEnclosingMethod().getName()).append(",").append("1");
+        FileTextServiceTimesApel.getInstance().writeTextToFile(stringBuilder.toString(),
+                "files/times.csv");
+
         for (int i = 0; i < listOfServices.length; i++)
             if (listOfServices[i].getCar().getBrand() == "Bmw" &&
                     listOfServices[i].getCar().getModel() == "Seria 5")
@@ -192,6 +232,11 @@ public class Service {
     }
 
     public int howManyCarsAreForTuning() {
+        StringBuilder stringBuilder = new StringBuilder("");
+        stringBuilder.append(new Object(){}.getClass().getEnclosingMethod().getName()).append(",").append("1");
+        FileTextServiceTimesApel.getInstance().writeTextToFile(stringBuilder.toString(),
+                "files/times.csv");
+
         int number = 0;
         for (int i = 0; i < listOfServices.length; i++)
             if (listOfServices[i].getClass() == CarServiceTuning.class)
@@ -200,6 +245,11 @@ public class Service {
     }
 
     public String theMostPowerfulCar() {
+        StringBuilder stringBuilder = new StringBuilder("");
+        stringBuilder.append(new Object(){}.getClass().getEnclosingMethod().getName()).append(",").append("1");
+        FileTextServiceTimesApel.getInstance().writeTextToFile(stringBuilder.toString(),
+                "files/times.csv");
+
         int power = 0;
         int index = 0;
         for (int i = 0; i < listOfServices.length; i++)
@@ -211,12 +261,22 @@ public class Service {
     }
 
     public void printCarsSorted() {
+        StringBuilder stringBuilder = new StringBuilder("");
+        stringBuilder.append(new Object(){}.getClass().getEnclosingMethod().getName()).append(",").append("1");
+        FileTextServiceTimesApel.getInstance().writeTextToFile(stringBuilder.toString(),
+                "files/times.csv");
+
         for (Car car : carsList) {
             System.out.println(car.getBrand());
         }
     }
 
     public void printCarServicesSorted() {
+        StringBuilder stringBuilder = new StringBuilder("");
+        stringBuilder.append(new Object(){}.getClass().getEnclosingMethod().getName()).append(",").append("1");
+        FileTextServiceTimesApel.getInstance().writeTextToFile(stringBuilder.toString(),
+                "files/times.csv");
+
         for (CarService carService : servicesVector)
             System.out.println(carService.getDuration());
     }

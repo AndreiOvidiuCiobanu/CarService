@@ -44,8 +44,15 @@ public class FileTextServiceDiesel {
             String line = lineNumberReader.readLine();
             String[] values = line.split(",");
             //int numberOfTurbines = Integer.parseUnsignedInt(values[2]);
-            diesel = new Diesel(Boolean.parseBoolean(values[0]), Boolean.parseBoolean(values[1]),
-                    Integer.parseInt(values[2]));
+
+            int nr = 0;
+            try {
+                nr = Integer.parseInt(values[2].trim());
+            } catch (NumberFormatException exc) {
+                exc.printStackTrace();
+            }
+
+            diesel = new Diesel(Boolean.parseBoolean(values[0]), Boolean.parseBoolean(values[1]), nr);
             lineNumberReader.close();
 
         } catch (FileNotFoundException e) {

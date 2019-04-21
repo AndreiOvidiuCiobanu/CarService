@@ -4,6 +4,7 @@ import com.fmi.project.autoService.*;
 import com.fmi.project.car.*;
 import com.fmi.project.fuel.*;
 
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -126,7 +127,8 @@ public class Service {
 
     public int howManySkodaCars() {
         StringBuilder stringBuilder = new StringBuilder("");
-        stringBuilder.append(new Object(){}.getClass().getEnclosingMethod().getName()).append(",").append("1");
+        stringBuilder.append(new Object(){}.getClass().getEnclosingMethod().getName()).
+                append(",").append(new Timestamp(System.currentTimeMillis()));
         FileTextServiceTimesApel.getInstance().writeTextToFile(stringBuilder.toString(),
                 "files/times.csv");
 
@@ -139,7 +141,8 @@ public class Service {
 
     public int theBiggestPeriodForACarInService() {
         StringBuilder stringBuilder = new StringBuilder("");
-        stringBuilder.append(new Object(){}.getClass().getEnclosingMethod().getName()).append(",").append("1");
+        stringBuilder.append(new Object(){}.getClass().getEnclosingMethod().getName()).
+                append(",").append(new Timestamp(System.currentTimeMillis()));
         FileTextServiceTimesApel.getInstance().writeTextToFile(stringBuilder.toString(),
                 "files/times.csv");
 
@@ -152,7 +155,8 @@ public class Service {
 
     public int howManyGuiltyPeopleForAccidents() {
         StringBuilder stringBuilder = new StringBuilder("");
-        stringBuilder.append(new Object(){}.getClass().getEnclosingMethod().getName()).append(",").append("1");
+        stringBuilder.append(new Object(){}.getClass().getEnclosingMethod().getName()).
+                append(",").append(new Timestamp(System.currentTimeMillis()));
         FileTextServiceTimesApel.getInstance().writeTextToFile(stringBuilder.toString(),
                 "files/times.csv");
 
@@ -165,7 +169,8 @@ public class Service {
 
     public double totalCostForServiceOperations() {
         StringBuilder stringBuilder = new StringBuilder("");
-        stringBuilder.append(new Object(){}.getClass().getEnclosingMethod().getName()).append(",").append("1");
+        stringBuilder.append(new Object(){}.getClass().getEnclosingMethod().getName()).
+                append(",").append(new Timestamp(System.currentTimeMillis()));
         FileTextServiceTimesApel.getInstance().writeTextToFile(stringBuilder.toString(),
                 "files/times.csv");
 
@@ -177,7 +182,8 @@ public class Service {
 
     public void theMostExpensiveCarServiceOperation() {
         StringBuilder stringBuilder = new StringBuilder("");
-        stringBuilder.append(new Object(){}.getClass().getEnclosingMethod().getName()).append(",").append("1");
+        stringBuilder.append(new Object(){}.getClass().getEnclosingMethod().getName()).
+                append(",").append(new Timestamp(System.currentTimeMillis()));
         FileTextServiceTimesApel.getInstance().writeTextToFile(stringBuilder.toString(),
                 "files/times.csv");
 
@@ -194,7 +200,8 @@ public class Service {
 
     public int howManyEcoCarsAreInService() {
         StringBuilder stringBuilder = new StringBuilder("");
-        stringBuilder.append(new Object(){}.getClass().getEnclosingMethod().getName()).append(",").append("1");
+        stringBuilder.append(new Object(){}.getClass().getEnclosingMethod().getName()).
+                append(",").append(new Timestamp(System.currentTimeMillis()));
         FileTextServiceTimesApel.getInstance().writeTextToFile(stringBuilder.toString(),
                 "files/times.csv");
 
@@ -207,7 +214,8 @@ public class Service {
 
     public int howManyCarsWithMoreThan200HorsePower() {
         StringBuilder stringBuilder = new StringBuilder("");
-        stringBuilder.append(new Object(){}.getClass().getEnclosingMethod().getName()).append(",").append("1");
+        stringBuilder.append(new Object(){}.getClass().getEnclosingMethod().getName()).
+                append(",").append(new Timestamp(System.currentTimeMillis()));
         FileTextServiceTimesApel.getInstance().writeTextToFile(stringBuilder.toString(),
                 "files/times.csv");
 
@@ -220,7 +228,8 @@ public class Service {
 
     public boolean areAnyBmwSeria5CarInService() {
         StringBuilder stringBuilder = new StringBuilder("");
-        stringBuilder.append(new Object(){}.getClass().getEnclosingMethod().getName()).append(",").append("1");
+        stringBuilder.append(new Object(){}.getClass().getEnclosingMethod().getName()).
+                append(",").append(new Timestamp(System.currentTimeMillis()));
         FileTextServiceTimesApel.getInstance().writeTextToFile(stringBuilder.toString(),
                 "files/times.csv");
 
@@ -233,7 +242,8 @@ public class Service {
 
     public int howManyCarsAreForTuning() {
         StringBuilder stringBuilder = new StringBuilder("");
-        stringBuilder.append(new Object(){}.getClass().getEnclosingMethod().getName()).append(",").append("1");
+        stringBuilder.append(new Object(){}.getClass().getEnclosingMethod().getName()).
+                append(",").append(new Timestamp(System.currentTimeMillis()));
         FileTextServiceTimesApel.getInstance().writeTextToFile(stringBuilder.toString(),
                 "files/times.csv");
 
@@ -246,7 +256,8 @@ public class Service {
 
     public String theMostPowerfulCar() {
         StringBuilder stringBuilder = new StringBuilder("");
-        stringBuilder.append(new Object(){}.getClass().getEnclosingMethod().getName()).append(",").append("1");
+        stringBuilder.append(new Object(){}.getClass().getEnclosingMethod().getName()).
+                append(",").append(new Timestamp(System.currentTimeMillis()));
         FileTextServiceTimesApel.getInstance().writeTextToFile(stringBuilder.toString(),
                 "files/times.csv");
 
@@ -262,7 +273,8 @@ public class Service {
 
     public void printCarsSorted() {
         StringBuilder stringBuilder = new StringBuilder("");
-        stringBuilder.append(new Object(){}.getClass().getEnclosingMethod().getName()).append(",").append("1");
+        stringBuilder.append(new Object(){}.getClass().getEnclosingMethod().getName()).
+                append(",").append(new Timestamp(System.currentTimeMillis()));
         FileTextServiceTimesApel.getInstance().writeTextToFile(stringBuilder.toString(),
                 "files/times.csv");
 
@@ -273,7 +285,8 @@ public class Service {
 
     public void printCarServicesSorted() {
         StringBuilder stringBuilder = new StringBuilder("");
-        stringBuilder.append(new Object(){}.getClass().getEnclosingMethod().getName()).append(",").append("1");
+        stringBuilder.append(new Object(){}.getClass().getEnclosingMethod().getName()).
+                append(",").append(new Timestamp(System.currentTimeMillis()));
         FileTextServiceTimesApel.getInstance().writeTextToFile(stringBuilder.toString(),
                 "files/times.csv");
 

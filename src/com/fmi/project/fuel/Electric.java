@@ -6,6 +6,7 @@ public class Electric extends Fuel {
 
     private int durationForFullyCharged;
 
+
     public Electric(boolean mayHaveProblems,
                     boolean mayBeForbidden,
                     int numberOfKilometesAutonomy, int durationForFullyCharged) {

@@ -6,6 +6,8 @@ public class Fuel {
 
     protected boolean mayBeForbidden;
 
+    protected int id;
+
     public Fuel(boolean mayHaveProblems, boolean mayBeForbidden) {
         this.mayHaveProblems = mayHaveProblems;
         this.mayBeForbidden = mayBeForbidden;

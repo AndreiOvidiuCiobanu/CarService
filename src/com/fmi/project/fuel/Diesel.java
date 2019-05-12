@@ -4,6 +4,7 @@ public class Diesel extends Fuel {
 
     private int numberOfTurbines;
 
+
     public Diesel(boolean mayHaveProblems,
                   boolean mayBeForbidden, int numberOfTurbines) {
         super(mayHaveProblems, mayBeForbidden);

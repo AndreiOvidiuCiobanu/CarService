@@ -1,6 +1,12 @@
 package com.fmi.project;
 
+import com.fmi.project.car.Car;
 import com.fmi.project.services.Service;
+import com.fmi.project.services.ServiceDieselDB;
+import com.fmi.project.services.ServiceElectricDB;
+
+import java.io.IOException;
+import java.util.List;
 
 public class Main {
 
@@ -17,6 +23,26 @@ public class Main {
         System.out.println(Service.getInstance().theMostPowerfulCar());
         Service.getInstance().printCarsSorted();
         Service.getInstance().printCarServicesSorted();
-        Service.getInstance().theMostExpensiveCarServiceOperation();
+        List<Car> cars = Service.getInstance().skodaCars();
+
+        for(Car car : cars)
+            System.out.println(car);
+//        Service.getInstance().theMostExpensiveCarServiceOperation();
+//        try {
+//            ServiceElectricDB.getInstance().insertElectricCarDB();
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+//        try {
+//            ServiceElectricDB.getInstance().updateElectricsBDById();
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+//
+//        try {
+//            ServiceElectricDB.getInstance().deleteElectricsBDByid();
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
     }
 }

@@ -42,6 +42,22 @@ public abstract class Car implements Comparable<Car> {
     public Car() {
     }
 
+    public double getConsumption() {
+        return consumption;
+    }
+
+    public void setConsumption(double consumption) {
+        this.consumption = consumption;
+    }
+
+    public int getPriceToFull() {
+        return priceToFull;
+    }
+
+    public void setPriceToFull(int priceToFull) {
+        this.priceToFull = priceToFull;
+    }
+
     public String getBrand() {
         return brand;
     }

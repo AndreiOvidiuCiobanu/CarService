@@ -4,7 +4,10 @@ import com.fmi.project.autoService.*;
 import com.fmi.project.car.*;
 import com.fmi.project.fuel.*;
 
-import java.sql.Timestamp;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -21,30 +24,212 @@ public class Service {
 
     private Service() {
 
-        //fuels[0] = new Diesel(true, true, 1);
+        Connection connection = null;
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            connection = DriverManager.getConnection
+                    ("jdbc:mysql://localhost:3306/pao_project?serverTimezone=UTC",
+                    "root", "Mysql123!");
 
-       // fuels[1] = new Gasoline(false, true, "Turbo");
+            Statement statement = connection.createStatement();
 
-        fuels[2] = new Diesel(true, true, 1);
+            ResultSet resultSet = statement.executeQuery("select * from diesels");
 
-        fuels[3] = new Diesel(true, true, 3);
+            int i = 2;
+            while (resultSet.next()) {
+
+                boolean prob, forb;
+                int turb;
+                if(resultSet.getInt(2) == 0)
+                    prob = false;
+                else
+                    prob = true;
+
+                if(resultSet.getInt(3) == 0)
+                    forb = false;
+                else
+                    forb = true;
+
+                turb = resultSet.getInt(4);
+
+                fuels[i] = new Diesel(prob, forb, turb);
+                i++;
+            }
+
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (connection != null) {
+                    connection.close();
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            connection = DriverManager.getConnection
+                    ("jdbc:mysql://localhost:3306/pao_project?serverTimezone=UTC",
+                    "root", "Mysql123!");
+
+            Statement statement = connection.createStatement();
+
+            ResultSet resultSet = statement.executeQuery("select * from gasolines");
+
+            int i = 1;
+            while (resultSet.next()) {
+
+                boolean prob, forb;
+                String type;
+                if(resultSet.getInt(2) == 0)
+                    prob = false;
+                else
+                    prob = true;
+
+                if(resultSet.getInt(3) == 0)
+                    forb = false;
+                else
+                    forb = true;
+
+                type = resultSet.getString(4);
+
+                fuels[i] = new Gasoline(prob, forb, type);
+                i = 8;
+            }
+
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (connection != null) {
+                    connection.close();
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            connection = DriverManager.getConnection
+                    ("jdbc:mysql://localhost:3306/pao_project?serverTimezone=UTC",
+                    "root", "Mysql123!");
+
+            Statement statement = connection.createStatement();
+
+            ResultSet resultSet = statement.executeQuery("select * from hybrids");
+
+            while (resultSet.next()) {
+
+                boolean prob, forb;
+                Integer km;
+                if(resultSet.getInt(2) == 0)
+                    prob = false;
+                else
+                    prob = true;
+
+                if(resultSet.getInt(3) == 0)
+                    forb = false;
+                else
+                    forb = true;
+
+                km = resultSet.getInt(4);
+
+                fuels[5] = new Hybrid(prob, forb, km);
+            }
+
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (connection != null) {
+                    connection.close();
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            connection = DriverManager.getConnection
+                    ("jdbc:mysql://localhost:3306/pao_project?serverTimezone=UTC",
+                    "root", "Mysql123!");
+
+            Statement statement = connection.createStatement();
+
+            ResultSet resultSet = statement.executeQuery("select * from electrics");
+
+            while (resultSet.next()) {
+
+                boolean prob, forb;
+                Integer km, duration;
+                if(resultSet.getInt(2) == 0)
+                    prob = false;
+                else
+                    prob = true;
+
+                if(resultSet.getInt(3) == 0)
+                    forb = false;
+                else
+                    forb = true;
+
+                km = resultSet.getInt(4);
+                duration = resultSet.getInt(5);
+
+                fuels[9] = new Electric(prob, forb, km, duration);
+            }
+
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (connection != null) {
+                    connection.close();
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+
+        fuels[0] = new Diesel(true, true, 1);
+
+        //fuels[1] = new Gasoline(false, true, "Turbo");
+
+        //fuels[2] = new Diesel(true, true, 1);
+
+        //fuels[3] = new Diesel(true, true, 3);
 
         //fuels[4] = new Hybrid(false, false, 50);
 
-        fuels[5] = new Diesel(true, true, 1);
+        //fuels[5] = new Hybrid(false, false, 50);
 
         fuels[6] = new Diesel(true, true, 1);
 
         fuels[7] = new Diesel(true, true, 1);
 
-        fuels[8] = new Gasoline(true, true, "Turbo");
+        //fuels[8] = new Gasoline(true, true, "Turbo");
 
         //fuels[9] = new Electric(false, false, 500, 120);
 
-        fuels[0] = FileTextServiceDiesel.getInstance().readDieselFromFile("files/diesel.csv");
-        fuels[1] = FileTextServiceGasoline.getInstance().readGasolineFromFile("files/gasoline.csv");
-        fuels[4] = FileTextServiceHybrid.getInstance().readHybridFromFile("files/hybrid.csv");
-        fuels[9] = FileTextServiceElectric.getInstance().readElectricFromFile("files/electric.csv");
+        fuels[0] = FileTextServiceDiesel.getInstance().
+                readDieselFromFile("files/diesel.csv");
+//        fuels[1] = FileTextServiceGasoline.getInstance().
+//                readGasolineFromFile("files/gasoline.csv");
+//        fuels[4] = FileTextServiceHybrid.getInstance().
+//                readHybridFromFile("files/hybrid.csv");
+//        fuels[9] = FileTextServiceElectric.getInstance().
+//                readElectricFromFile("files/electric.csv");
 
         cars[0] = new Break("Skoda", "Superb", 6, "blue",
                 190, 2000, 123000,
@@ -70,7 +255,7 @@ public class Service {
                 170, 1600, 25000,
                 9, 450, fuels[5], true);
 
-        cars[6] = new Suv("Skoda", "Kodiaq", 6, "green",
+        cars[6] = new Suv("Volkswagen", "Kodiaq", 6, "green",
                 170, 2000, 45000,
                 9, 450, fuels[6], true);
 
@@ -111,7 +296,8 @@ public class Service {
 
         listOfServices[8] = new CarServiceTuning(cars[8], 3000, 10, "vopsea");
 
-        listOfServices[9] = new CarServiceTuning(cars[9], 10000, 20, "upgrade estetic");
+        listOfServices[9] = new CarServiceTuning(cars[9], 10000, 20,
+                "upgrade estetic");
 
         for (int i = 0; i < 10; i++) {
             carsList.add(cars[i]);
@@ -128,7 +314,8 @@ public class Service {
     public int howManySkodaCars() {
         StringBuilder stringBuilder = new StringBuilder("");
         stringBuilder.append(new Object(){}.getClass().getEnclosingMethod().getName()).
-                append(",").append(new Timestamp(System.currentTimeMillis()));
+                append(",").append(new Timestamp(System.currentTimeMillis()))
+                .append(Thread.currentThread().getName());
         FileTextServiceTimesApel.getInstance().writeTextToFile(stringBuilder.toString(),
                 "files/times.csv");
 
@@ -142,7 +329,8 @@ public class Service {
     public int theBiggestPeriodForACarInService() {
         StringBuilder stringBuilder = new StringBuilder("");
         stringBuilder.append(new Object(){}.getClass().getEnclosingMethod().getName()).
-                append(",").append(new Timestamp(System.currentTimeMillis()));
+                append(",").append(new Timestamp(System.currentTimeMillis()))
+                .append(Thread.currentThread().getName());
         FileTextServiceTimesApel.getInstance().writeTextToFile(stringBuilder.toString(),
                 "files/times.csv");
 
@@ -153,10 +341,46 @@ public class Service {
         return period;
     }
 
+    public List<Car> carsMoreThan10DaysInService(){
+        StringBuilder stringBuilder = new StringBuilder("");
+        stringBuilder.append(new Object() {
+        }.getClass().getEnclosingMethod().getName()).
+                append(",").append(new Timestamp(System.currentTimeMillis()))
+                .append(Thread.currentThread().getName());
+        FileTextServiceTimesApel.getInstance().writeTextToFile(stringBuilder.toString(),
+                "files/times.csv");
+
+        List<Car> carsMoreThan10DaysInService = new ArrayList<>();
+        for (int i = 0; i < listOfServices.length; i++)
+            if (listOfServices[i].getDuration() > 10) {
+                carsMoreThan10DaysInService.add(listOfServices[i].getCar());
+            }
+        return carsMoreThan10DaysInService;
+    }
+
+    public List<Car> carsWithMoreThan100kKm(){
+        StringBuilder stringBuilder = new StringBuilder("");
+        stringBuilder.append(new Object() {
+        }.getClass().getEnclosingMethod().getName()).
+                append(",").append(new Timestamp(System.currentTimeMillis()))
+                .append(Thread.currentThread().getName());
+        FileTextServiceTimesApel.getInstance().writeTextToFile(stringBuilder.toString(),
+                "files/times.csv");
+
+        List<Car> carsWithMoreThan100kKm = new ArrayList<>();
+        for (int i = 0; i < listOfServices.length; i++)
+            if (listOfServices[i].getCar().getNumberOfKilometres() > 100000) {
+                carsWithMoreThan100kKm.add(listOfServices[i].getCar());
+            }
+
+        return carsWithMoreThan100kKm;
+    }
+
     public int howManyGuiltyPeopleForAccidents() {
         StringBuilder stringBuilder = new StringBuilder("");
         stringBuilder.append(new Object(){}.getClass().getEnclosingMethod().getName()).
-                append(",").append(new Timestamp(System.currentTimeMillis()));
+                append(",").append(new Timestamp(System.currentTimeMillis()))
+                .append(Thread.currentThread().getName());
         FileTextServiceTimesApel.getInstance().writeTextToFile(stringBuilder.toString(),
                 "files/times.csv");
 
@@ -170,7 +394,8 @@ public class Service {
     public double totalCostForServiceOperations() {
         StringBuilder stringBuilder = new StringBuilder("");
         stringBuilder.append(new Object(){}.getClass().getEnclosingMethod().getName()).
-                append(",").append(new Timestamp(System.currentTimeMillis()));
+                append(",").append(new Timestamp(System.currentTimeMillis()))
+                .append(Thread.currentThread().getName());
         FileTextServiceTimesApel.getInstance().writeTextToFile(stringBuilder.toString(),
                 "files/times.csv");
 
@@ -183,7 +408,8 @@ public class Service {
     public void theMostExpensiveCarServiceOperation() {
         StringBuilder stringBuilder = new StringBuilder("");
         stringBuilder.append(new Object(){}.getClass().getEnclosingMethod().getName()).
-                append(",").append(new Timestamp(System.currentTimeMillis()));
+                append(",").append(new Timestamp(System.currentTimeMillis()))
+                .append(Thread.currentThread().getName());
         FileTextServiceTimesApel.getInstance().writeTextToFile(stringBuilder.toString(),
                 "files/times.csv");
 
@@ -201,7 +427,8 @@ public class Service {
     public int howManyEcoCarsAreInService() {
         StringBuilder stringBuilder = new StringBuilder("");
         stringBuilder.append(new Object(){}.getClass().getEnclosingMethod().getName()).
-                append(",").append(new Timestamp(System.currentTimeMillis()));
+                append(",").append(new Timestamp(System.currentTimeMillis()))
+                .append(Thread.currentThread().getName());
         FileTextServiceTimesApel.getInstance().writeTextToFile(stringBuilder.toString(),
                 "files/times.csv");
 
@@ -212,10 +439,29 @@ public class Service {
         return number;
     }
 
+    public List<Car> ecoCars() {
+        StringBuilder stringBuilder = new StringBuilder("");
+        stringBuilder.append(new Object() {
+        }.getClass().getEnclosingMethod().getName()).
+                append(",").append(new Timestamp(System.currentTimeMillis()))
+                .append(Thread.currentThread().getName());
+        FileTextServiceTimesApel.getInstance().writeTextToFile(stringBuilder.toString(),
+                "files/times.csv");
+
+        List<Car> ecoCars = new ArrayList<>();
+        for (int i = 0; i < listOfServices.length; i++)
+            if (!listOfServices[i].getCar().getFuel().isMayBeForbidden()) {
+                ecoCars.add(listOfServices[i].getCar());
+            }
+
+        return ecoCars;
+    }
+
     public int howManyCarsWithMoreThan200HorsePower() {
         StringBuilder stringBuilder = new StringBuilder("");
         stringBuilder.append(new Object(){}.getClass().getEnclosingMethod().getName()).
-                append(",").append(new Timestamp(System.currentTimeMillis()));
+                append(",").append(new Timestamp(System.currentTimeMillis()))
+                .append(Thread.currentThread().getName());
         FileTextServiceTimesApel.getInstance().writeTextToFile(stringBuilder.toString(),
                 "files/times.csv");
 
@@ -229,7 +475,8 @@ public class Service {
     public boolean areAnyBmwSeria5CarInService() {
         StringBuilder stringBuilder = new StringBuilder("");
         stringBuilder.append(new Object(){}.getClass().getEnclosingMethod().getName()).
-                append(",").append(new Timestamp(System.currentTimeMillis()));
+                append(",").append(new Timestamp(System.currentTimeMillis()))
+                .append(Thread.currentThread().getName());
         FileTextServiceTimesApel.getInstance().writeTextToFile(stringBuilder.toString(),
                 "files/times.csv");
 
@@ -243,7 +490,8 @@ public class Service {
     public int howManyCarsAreForTuning() {
         StringBuilder stringBuilder = new StringBuilder("");
         stringBuilder.append(new Object(){}.getClass().getEnclosingMethod().getName()).
-                append(",").append(new Timestamp(System.currentTimeMillis()));
+                append(",").append(new Timestamp(System.currentTimeMillis()))
+                .append(Thread.currentThread().getName());
         FileTextServiceTimesApel.getInstance().writeTextToFile(stringBuilder.toString(),
                 "files/times.csv");
 
@@ -257,7 +505,8 @@ public class Service {
     public String theMostPowerfulCar() {
         StringBuilder stringBuilder = new StringBuilder("");
         stringBuilder.append(new Object(){}.getClass().getEnclosingMethod().getName()).
-                append(",").append(new Timestamp(System.currentTimeMillis()));
+                append(",").append(new Timestamp(System.currentTimeMillis()))
+                .append(Thread.currentThread().getName());
         FileTextServiceTimesApel.getInstance().writeTextToFile(stringBuilder.toString(),
                 "files/times.csv");
 
@@ -271,10 +520,43 @@ public class Service {
         return listOfServices[index].getCar().getBrand() + " " + listOfServices[index].getCar().getModel();
     }
 
+    public List<Car> skodaCars(){
+        StringBuilder stringBuilder = new StringBuilder("");
+        stringBuilder.append(new Object(){}.getClass().getEnclosingMethod().getName()).
+                append(",").append(new Timestamp(System.currentTimeMillis()))
+                .append(Thread.currentThread().getName());
+        FileTextServiceTimesApel.getInstance().writeTextToFile(stringBuilder.toString(),
+                "files/times.csv");
+
+        List<Car> skodaCars = new ArrayList<>();
+
+        for (int i = 0; i < listOfServices.length; i++)
+            if (listOfServices[i].getCar().getBrand() == "Skoda")
+                skodaCars.add(listOfServices[i].getCar());
+        return skodaCars;
+    }
+
+    public List<Car> carsWithMoreThan150HP(){
+        StringBuilder stringBuilder = new StringBuilder("");
+        stringBuilder.append(new Object(){}.getClass().getEnclosingMethod().getName()).
+                append(",").append(new Timestamp(System.currentTimeMillis()))
+                .append(Thread.currentThread().getName());
+        FileTextServiceTimesApel.getInstance().writeTextToFile(stringBuilder.toString(),
+                "files/times.csv");
+
+        List<Car> carsWithMoreThan150HP = new ArrayList<>();
+
+        for (int i = 0; i < listOfServices.length; i++)
+            if (listOfServices[i].getCar().getHorsePower() >= 150)
+                carsWithMoreThan150HP.add(listOfServices[i].getCar());
+        return carsWithMoreThan150HP;
+    }
+
     public void printCarsSorted() {
         StringBuilder stringBuilder = new StringBuilder("");
         stringBuilder.append(new Object(){}.getClass().getEnclosingMethod().getName()).
-                append(",").append(new Timestamp(System.currentTimeMillis()));
+                append(",").append(new Timestamp(System.currentTimeMillis()))
+                .append(Thread.currentThread().getName());
         FileTextServiceTimesApel.getInstance().writeTextToFile(stringBuilder.toString(),
                 "files/times.csv");
 
@@ -286,7 +568,8 @@ public class Service {
     public void printCarServicesSorted() {
         StringBuilder stringBuilder = new StringBuilder("");
         stringBuilder.append(new Object(){}.getClass().getEnclosingMethod().getName()).
-                append(",").append(new Timestamp(System.currentTimeMillis()));
+                append(",").append(new Timestamp(System.currentTimeMillis()))
+                .append(Thread.currentThread().getName());
         FileTextServiceTimesApel.getInstance().writeTextToFile(stringBuilder.toString(),
                 "files/times.csv");
 
